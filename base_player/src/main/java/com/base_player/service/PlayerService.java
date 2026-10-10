@@ -1,7 +1,7 @@
 package com.base_player.service;
 
 import com.base_player.dto.PlayerDto;
-import com.base_player.model.PlayerModel;
+import com.base_player.dto.PlayerRsDto;
 import com.base_player.repository.PlayerRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +24,12 @@ public class PlayerService {
             .collect(Collectors.toList());
     }
 
-    public Integer createPlayer(PlayerDto playerDto) {
-        return playerRepository.save(playerDto.toModel()).getId();
+    public PlayerRsDto createPlayer(PlayerDto playerDto) {
+        Integer id = playerRepository.save(playerDto.toModel()).getId();
+        PlayerRsDto playerRsDto = PlayerRsDto.builder()
+            .message("GG")
+            .id(id)
+            .build();
+        return playerRsDto;
     }
 }
